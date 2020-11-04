@@ -9,10 +9,13 @@
           upgrade: dist
           force_apt_get: yes
        - name: python
-         package:
-          name: python
-          state: latest
-       - name: common
+         shell: |
+          sudo add-apt-repository ppa:jonathonf/python-3.7
+          sudo apt update
+          sudo apt install python3.7
+          sudo rm /usr/bin/python
+          sudo ln -s /usr/bin/python3 /usr/bin/python
+       - name: common libraries for python
          package:
           name: software-properties-common
           state: latest
