@@ -1,17 +1,47 @@
 ---
 # tasks file for edjruntime
        - name: Install docker
-         apt:
-          name: docker
-          state: latest 
+         package:
+          name: docker.io
+          state: latest
+       - name: update
+         package:
+          upgrade: dist
+          force_apt_get: yes
+       - name: python
+         package:
+          name: python
+          state: latest
+       - name: common
+         package:
+          name: software-properties-common
+          state: latest
+          #- name: python lib
+          #package:
+          # name: python3-pip
+          # state: latest
+       - name: pyhon install for pip
+         shell: curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && python get-pip.py --force-reinstall
+       - name: docker-py
+         pip:
+          name: docker-py
        - name: github login
-         shell: cat TOKEN| docker login https://docker.pkg.github.com -u sriedjx --password-stdin
+         shell: cat TOKEN | docker login https://docker.pkg.github.com -u sriedjx --password-stdin
        - name: edjcli binary
          shell: wget "https://docs.google.com/uc?export=download&id=13pWZgKU9hbR1nhKv-laHKetfesCKTIUL" -O edjx.zip 
-       - name: Extract foo.tgz into /var/lib/foo
+       - name: install unzip
+         package:
+           name: unzip
+           state: latest
+       - name: Extract edjx.zip to /usr/local/bin
          unarchive:
           src: edjx.zip
-          dest: /usr/local/bin/
+          dest: ./
+       - name: copy edjx binary to /usr/local/bin
+         copy:
+           src: ./conf/edjx
+           dest: /usr/local/bin
+           mode: 0744 
        - name: init
          shell: edjx config init
        - name: edjx login
@@ -24,5 +54,11 @@
           send "runtime/certificates/private.pem\n"
           expect "Save node public key to:"
           send "runtime/certificates/public.pem\n"
+          expect "Save node certificate to:"
+          send "█untime/certificates/cert.pem\n"
+          expect "Save node configuration to:"
+          send "█untime/.env_user\n"
+          expect "IP Address for the node to listen on:"
+          send "ip=$(wget -q -O - ipinfo.io/ip)\n"
           exit 0
 

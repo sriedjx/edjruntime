@@ -4,8 +4,8 @@
      name: edjruntime
      image: docker.pkg.github.com/edjx/edjruntime/edjruntime:alpha
      state: started
-     env_file: .env
-     env_file: .env_user
+     env_file: conf/runtime/.env
+     env_file: conf/runtime/.env_user
      exposed_ports:
      - 8085:8085
      - 1883:1883
