@@ -48,6 +48,8 @@
          shell: edjx config init
        - name: edjx login
          shell:  edjx login -u suman+2@edjx.io -p Hello@123
+       - name: permission to node register.sh
+         command: chmod +x ./conf/node-register.sh
        - name: node register
          shell: |
           spawn ./conf/node-register.sh
