@@ -28,7 +28,7 @@
          pip:
           name: docker-py
        - name: github login
-         shell: echo 272597bbda042ae04aac2f8421034b2fa369109c | docker login https://docker.pkg.github.com -u sriedjx --password-stdin
+         shell: echo ceae4f110341a90997dbbe55dc0d7375c8aabf32 | docker login https://docker.pkg.github.com -u sriedjx --password-stdin
        - name: edjcli binary
          shell: wget "https://docs.google.com/uc?export=download&id=13pWZgKU9hbR1nhKv-laHKetfesCKTIUL" -O edjx.zip 
        - name: install unzip
