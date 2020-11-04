@@ -1,0 +1,5 @@
+---
+- hosts: localhost
+  tasks:
+     - name: token
+       shell: cat TOKEN| docker login https://docker.pkg.github.com -u sriedjx --password-stdin
