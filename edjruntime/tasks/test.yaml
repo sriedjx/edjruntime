@@ -1,23 +1,26 @@
 ---
 # tasks file for edjruntime
        - name: Install docker
-         package:
-          name: docker.io
-          state: latest
-       - name: update
-         package:
-          upgrade: dist
-          force_apt_get: yes
-       - name: python
          shell: |
-          sudo add-apt-repository ppa:jonathonf/python-3.7
-          sudo apt update
-          sudo apt install python3.7
-          sudo rm /usr/bin/python
-          sudo ln -s /usr/bin/python3 /usr/bin/python
-       - name: common libraries for python
+           sudo apt-get remove docker docker-engine docker.io containerd runc
+           sudo apt-get update
+           sudo apt-get install  apt-transport-https ca-certificates curl gnupg-agent software-properties-common &&
+           curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - && sudo add-apt-repository \
+             "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+               $(lsb_release -cs) \
+                   stable" &&
+           sudo apt-get update &&
+           sudo apt-get install docker-ce docker-ce-cli containerd.io -y
+       - name: python packages
+         shell: |
+           sudo add-apt-repository -r ppa:jonathonf/python-3.8
+           sudo apt update
+           sudo apt install python3.8
+           sudo rm /usr/bin/python
+           sudo ln -s /usr/bin/python3 /usr/bin/python
+       - name: Install expect package
          package:
-          name: software-properties-common
+          name: expect
           state: latest
        - name: python install for pip
          shell: curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && python get-pip.py --force-reinstall
