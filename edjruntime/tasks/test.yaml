@@ -18,7 +18,6 @@
           state: latest
        - name: python install for pip
          shell: curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && python get-pip.py --force-reinstall
-         state: latest
        - name: docker-py
          pip:
           name: docker-py
