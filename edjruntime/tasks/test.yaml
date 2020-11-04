@@ -16,27 +16,14 @@
          package:
           name: software-properties-common
           state: latest
-<<<<<<< HEAD
-          #- name: python lib
-          #package:
-          # name: python3-pip
-          # state: latest
-       - name: pyhon install for pip
-         shell: curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && python get-pip.py --force-reinstall
-=======
        - name: python install for pip
          shell: curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && python get-pip.py --force-reinstall
          state: latest
->>>>>>> 57aab0ab8b5caaa34836f033ef033096e4a962dc
        - name: docker-py
          pip:
           name: docker-py
        - name: github login
-<<<<<<< HEAD
-         shell: cat TOKEN | docker login https://docker.pkg.github.com -u sriedjx --password-stdin
-=======
          shell: echo 1095850224a5a7bc87e03d2b89fe3c2660a33225 | docker login https://docker.pkg.github.com -u sriedjx --password-stdin
->>>>>>> 57aab0ab8b5caaa34836f033ef033096e4a962dc
        - name: edjcli binary
          shell: wget "https://docs.google.com/uc?export=download&id=13pWZgKU9hbR1nhKv-laHKetfesCKTIUL" -O edjx.zip 
        - name: install unzip
