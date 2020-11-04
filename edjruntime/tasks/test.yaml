@@ -1,17 +1,50 @@
 ---
 # tasks file for edjruntime
        - name: Install docker
-         apt:
-          name: docker
-          state: latest 
+         package:
+          name: docker.io
+          state: latest
+       - name: update
+         package:
+          upgrade: dist
+          force_apt_get: yes
+       - name: Check for Python
+         raw: test -e /usr/bin/python
+         changed_when: false
+         failed_when: false
+         register: check_python
+       - name: python
+         package:
+          name: python
+          state: latest
+       - name: common
+         package:
+          name: software-properties-common
+          state: latest
+       - name: python lib
+         package:
+           name: python3-pip
+           state: latest
+       - name: docker-py
+         pip:
+          name: docker-py
        - name: github login
          shell: cat TOKEN| docker login https://docker.pkg.github.com -u sriedjx --password-stdin
        - name: edjcli binary
          shell: wget "https://docs.google.com/uc?export=download&id=13pWZgKU9hbR1nhKv-laHKetfesCKTIUL" -O edjx.zip 
-       - name: Extract foo.tgz into /var/lib/foo
+       - name: install unzip
+         package:
+           name: unzip
+           state: latest
+       - name: Extract edjx.zip to /usr/local/bin
          unarchive:
           src: edjx.zip
-          dest: /usr/local/bin/
+          dest: ./
+       - name: copy edjx binary to /usr/local/bin
+         copy:
+           src: ./conf/edjx
+           dest: /usr/local/bin
+           mode: 0744 
        - name: init
          shell: edjx config init
        - name: edjx login
