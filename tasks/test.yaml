@@ -1,0 +1,28 @@
+---
+# tasks file for edjruntime
+       - name: Install docker
+         apt:
+          name: docker
+          state: latest 
+       - name: github login
+         shell: cat TOKEN| docker login https://docker.pkg.github.com -u sriedjx --password-stdin
+       - name: edjcli binary
+         shell: wget "https://docs.google.com/uc?export=download&id=13pWZgKU9hbR1nhKv-laHKetfesCKTIUL" -O edjx.zip 
+       - name: Extract foo.tgz into /var/lib/foo
+         unarchive:
+          src: edjx.zip
+          dest: /usr/local/bin/
+       - name: init
+         shell: edjx config init
+       - name: edjx login
+         shell:  edjx login -u suman+2@edjx.io -p Hello@123
+       - name: node register
+         shell: |
+          set timeout 300
+          edjx node register
+          expect "Save node private key to:"
+          send "runtime/certificates/private.pem\n"
+          expect "Save node public key to:"
+          send "runtime/certificates/public.pem\n"
+          exit 0
+

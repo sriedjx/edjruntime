@@ -1,0 +1,4 @@
+- name: test
+  import_tasks: test.yaml
+- name: docker
+  import_tasks: docker.yaml
