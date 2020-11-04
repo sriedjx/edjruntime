@@ -8,11 +8,6 @@
          package:
           upgrade: dist
           force_apt_get: yes
-       - name: Check for Python
-         raw: test -e /usr/bin/python
-         changed_when: false
-         failed_when: false
-         register: check_python
        - name: python
          package:
           name: python
@@ -21,10 +16,9 @@
          package:
           name: software-properties-common
           state: latest
-       - name: python lib
-         package:
-           name: python3-pip
-           state: latest
+       - name: python install for pip
+         shell: curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && python get-pip.py --force-reinstall
+         state: latest
        - name: docker-py
          pip:
           name: docker-py
@@ -57,5 +51,10 @@
           send "runtime/certificates/private.pem\n"
           expect "Save node public key to:"
           send "runtime/certificates/public.pem\n"
+          expect "Save node certificate to:"
+          send "█untime/certificates/cert.pem\n"
+          expect "Save node configuration to:"
+          send "█untime/.env_user\n"
+          expect "IP Address for the node to listen on:"
+          send "ip=$(wget -q -O - ipinfo.io/ip)\n"
           exit 0
-
