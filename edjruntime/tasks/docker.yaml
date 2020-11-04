@@ -14,8 +14,7 @@
      - 443:443
      - 53:53
      - 3001:3001
-       # networks:
-       # - name: host
+     network_mode: host
      volumes:
       - config:/runtime/config
       - certificates:/runtime/certificates
