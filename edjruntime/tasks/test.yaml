@@ -47,16 +47,17 @@
          shell:  edjx login -u suman+2@edjx.io -p Hello@123
        - name: node register
          shell: |
-          set timeout 300
-          edjx node register
+          spawn ./conf/node-register.sh
           expect "Save node private key to:"
-          send "runtime/certificates/private.pem\n"
+          send -- "conf/runtime/certificates/private.pem\n"
           expect "Save node public key to:"
-          send "runtime/certificates/public.pem\n"
+          send -- "conf/runtime/certificates/public.pem\n"
           expect "Save node certificate to:"
-          send "█untime/certificates/cert.pem\n"
+          send -- "conf/runtime/certificates/cert.pem\n"
           expect "Save node configuration to:"
-          send "█untime/.env_user\n"
+          send -- "conf/runtime/.env_user\n"
           expect "IP Address for the node to listen on:"
-          send "ip=$(wget -q -O - ipinfo.io/ip)\n"
+          send -- "echo $(wget -q -O - ipinfo.io/ip)\n"
           exit 0
+         args:
+          executable: /usr/bin/expect
