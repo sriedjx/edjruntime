@@ -1,4 +1,6 @@
-- name: test
-  import_tasks: test.yaml
-- name: docker
+- name: Install Packages
+  import_tasks: Install.yaml
+- name: Register
+  import_tasks: register.yaml
+- name: Docker
   import_tasks: docker.yaml
