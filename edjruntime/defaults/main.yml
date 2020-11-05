@@ -1,2 +1,16 @@
 ---
 # defaults file for edjruntime
+PACKAGES:
+  - make
+  - curl
+  - gnupg-agent
+  - software-properties-common
+  - git
+  - unzip
+  - expect
+  - docker-ce
+  - docker-ce-cli
+  - containerd.io
+  - python3.8
+  - apt-transport-https
+  - ca-certificates
