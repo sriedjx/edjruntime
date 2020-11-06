@@ -15,7 +15,7 @@
      - 3001:3001
      network_mode: host
      volumes:
-      - runtime/config:/runtime/config
-      - runtime/certificates:/runtime/certificates
-      - runtime/storage:/runtime/storage
+      - /root/runtime/config:/runtime/config
+      - /root/runtime/certificates:/runtime/certificates
+      - /root/runtime/storage:/runtime/storage
      
