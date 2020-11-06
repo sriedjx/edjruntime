@@ -1,7 +1,7 @@
 ---
 # tasks file for edjruntime
        - name: github login
-         shell: echo ceae4f110341a90997dbbe55dc0d7375c8aabf32 | docker login https://docker.pkg.github.com -u sriedjx --password-stdin
+         shell: echo dc4e0f5a4c42edff4d7e2319b0d429c42c1dbf80 | docker login https://docker.pkg.github.com -u sriedjx --password-stdin
        - name: edjcli binary
          shell: sudo curl -L "https://edjx-alpha.nyc3.digitaloceanspaces.com/edjcli/alpha/linux/amd64/edjx" -o /usr/local/bin/edjx && sudo chmod +x /usr/local/bin/edjx
        - name: init
