@@ -22,5 +22,5 @@
           edjx node gencsr runtime/certificates/private.pem -o runtime/certificates/csr.pem
           edjx node createcert runtime/certificates/csr.pem -c runtime/certificates/cert.pem
           edjx node gen-env runtime/certificates/private.pem -o runtime/.env_user -i $ip
-          sed -r '/^\s*$/d' runtime/.env
+          sed -i '/^\s*$/d' runtime/.env
           cat runtime/.env_user >> runtime/.env
