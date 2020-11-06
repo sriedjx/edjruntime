@@ -16,3 +16,5 @@
           edjx node gencsr runtime/certificates/private.pem -o runtime/certificates/csr.pem
           edjx node createcert runtime/certificates/csr.pem -c runtime/certificates/cert.pem
           edjx node gen-env runtime/certificates/private.pem -o runtime/.env_user -i $ip
+          sed -i '/^\s*$/d' runtime/.env. ####remove empty lines
+          cat runtime/.env_user >> runtime/.env
