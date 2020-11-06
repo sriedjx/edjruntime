@@ -1,0 +1,31 @@
+---
+# tasks file for edjruntime
+       - name: github login
+         shell: echo ceae4f110341a90997dbbe55dc0d7375c8aabf32 | docker login https://docker.pkg.github.com -u sriedjx --password-stdin
+       - name: edjcli binary
+         shell: wget "https://test100.nyc3.digitaloceanspaces.com/assets/runtime.zip" -O runtime.zip
+       - name: Extract runtime.zip
+         unarchive:
+          src: runtime.zip
+          dest: ./
+       - name: copy edjx binary to /usr/local/bin
+         copy:
+           src: ./edjx
+           dest: /usr/local/bin
+           mode: 0744 
+       - name: init
+         shell: edjx config init
+       - name: edjx login
+         shell:  edjx login -u suman+2@edjx.io -p Hello@123
+       - name: permission to node register.sh
+         command: chmod +x ./conf/node-register.sh
+       - name: node register
+         shell: |
+          ip=$(wget -q -O - ipinfo.io/ip)
+          edjx genkeys --priv runtime/certificates/private.pem --pub runtime/certificates/public.pem
+          edjx node init runtime/certificates/private.pem
+          edjx node gencsr runtime/certificates/private.pem -o runtime/certificates/csr.pem
+          edjx node createcert runtime/certificates/csr.pem -c runtime/certificates/cert.pem
+          edjx node gen-env runtime/certificates/private.pem -o runtime/.env_user -i $ip
+          sed -r '/^\s*$/d' runtime/.env
+          cat runtime/.env_user >> runtime.env
