@@ -1,5 +1,5 @@
 - name: Update apt packages
-   apt:
+  apt:
       update_cache: "yes"
       force_apt_get: "yes"
 
