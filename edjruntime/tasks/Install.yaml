@@ -22,4 +22,4 @@
       state: present
       force_apt_get: "yes"
  - name: link python3 to python
-   command: ln /usr/bin/python3 /usr/bin/python
+   command: ln -s /usr/bin/python3 /usr/bin/python
