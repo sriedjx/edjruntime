@@ -1,14 +1,3 @@
- - name: Update apt packages
-   apt:
-      update_cache: "yes"
-      force_apt_get: "yes"
-
- - name: Install packages needed for Docker
-   apt:
-      name: "{{ PACKAGES }}"
-      state: present
-      force_apt_get: "yes"
-
  - name: Add Docker GPG apt Key
    apt_key:
       url: https://download.docker.com/linux/ubuntu/gpg
@@ -22,8 +11,13 @@
    apt_repository:
       repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ubuntu_version.stdout }} stable"
       state: present
-
  - name: Update apt packages
    apt:
       update_cache: "yes"
+      force_apt_get: "yes"
+
+ - name: Install packages needed for Docker
+   apt:
+      name: "{{ PACKAGES }}"
+      state: present
       force_apt_get: "yes"
