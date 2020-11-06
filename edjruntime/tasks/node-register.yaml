@@ -8,11 +8,8 @@
          unarchive:
           src: runtime.zip
           dest: ./
-       - name: copy edjx binary to /usr/local/bin
-         copy:
-           src: ./edjx
-           dest: /usr/local/bin
-           mode: 0744 
+       - name: Install CLI
+         shell: sudo curl -L "https://edjx-alpha.nyc3.digitaloceanspaces.com/edjcli/alpha/linux/amd64/edjx" -o /usr/local/bin/edjx && sudo chmod +x /usr/local/bin/edjx
        - name: init
          shell: edjx config init
        - name: edjx login
