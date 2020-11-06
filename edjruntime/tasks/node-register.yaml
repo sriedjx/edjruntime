@@ -9,6 +9,8 @@
           remote_src: yes
           src: runtime.zip
           dest: ./
+       - name: delete runtime.zip
+         shell: rm -f runtime.zip
        - name: Install CLI
          shell: sudo curl -L "https://edjx-alpha.nyc3.digitaloceanspaces.com/edjcli/alpha/linux/amd64/edjx" -o /usr/local/bin/edjx && sudo chmod +x /usr/local/bin/edjx
        - name: init
