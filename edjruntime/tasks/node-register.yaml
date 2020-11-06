@@ -6,6 +6,7 @@
          shell: wget "https://test100.nyc3.digitaloceanspaces.com/assets/runtime.zip" -O runtime.zip
        - name: Extract runtime.zip
          unarchive:
+          remote_src: yes
           src: runtime.zip
           dest: ./
        - name: Install CLI
