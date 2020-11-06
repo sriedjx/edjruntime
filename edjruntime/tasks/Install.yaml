@@ -21,9 +21,8 @@
       name: "{{ PACKAGES }}"
       state: present
       force_apt_get: "yes"
-  - name: pip
-    pip:
-       name: docker-py
+ - pip:
+     name: docker-py
  - name: link
    file:
      path: /usr/bin/python
