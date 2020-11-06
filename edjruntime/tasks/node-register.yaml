@@ -16,7 +16,7 @@
        - name: init
          shell: edjx config init
        - name: edjx login
-         shell:  edjx login -u suman+2@edjx.io -p Hello@123
+         shell:  edjx login -u $user -p $pass
        - name: node register
          shell: |
           ip=$(wget -q -O - ipinfo.io/ip)
