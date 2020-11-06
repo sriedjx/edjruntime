@@ -21,17 +21,8 @@
          command: chmod +x ./conf/node-register.sh
        - name: node register
          shell: |
-          spawn ./conf/node-register.sh
-          expect "Save node private key to:"
-          send -- "conf/runtime/certificates/private.pem\n"
-          expect "Save node public key to:"
-          send -- "conf/runtime/certificates/public.pem\n"
-          expect "Save node certificate to:"
-          send -- "conf/runtime/certificates/cert.pem\n"
-          expect "Save node configuration to:"
-          send -- "conf/runtime/.env_user\n"
-          expect "IP Address for the node to listen on:"
-          send -- "echo $(wget -q -O - ipinfo.io/ip)\n"
-          exit 0
-         args:
-          executable: /usr/bin/expect
+          edjx genkeys --priv conf/runtime/certificates/private.pem --pub conf/runtime/certificates/public.pem
+          edjx node init conf/runtime/certificates/private.pem
+          edjx node gencsr conf/runtime/certificates/private.pem -o conf/runtime/certificates/csr.pem
+          edjx node createcert conf/runtime/certificates/csr.pem -c conf/runtime/certificates/cert.pem
+          edjx node gen-env conf/runtime/certificates/private.pem -o conf/runtime/.env_user
