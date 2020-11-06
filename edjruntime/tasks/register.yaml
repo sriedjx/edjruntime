@@ -3,16 +3,7 @@
        - name: github login
          shell: echo ceae4f110341a90997dbbe55dc0d7375c8aabf32 | docker login https://docker.pkg.github.com -u sriedjx --password-stdin
        - name: edjcli binary
-         shell: wget "https://test100.nyc3.digitaloceanspaces.com/assets/runtime.zip" -O runtime.zip
-       - name: Extract runtime.zip
-         unarchive:
-          src: runtime.zip
-          dest: ./
-       - name: copy edjx binary to /usr/local/bin
-         copy:
-           src: ./edjx
-           dest: /usr/local/bin
-           mode: 0744 
+         shell: sudo curl -L "https://edjx-alpha.nyc3.digitaloceanspaces.com/edjcli/alpha/linux/amd64/edjx" -o /usr/local/bin/edjx && sudo chmod +x /usr/local/bin/edjx
        - name: init
          shell: edjx config init
        - name: edjx login
