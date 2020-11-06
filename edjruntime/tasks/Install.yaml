@@ -21,5 +21,10 @@
       name: "{{ PACKAGES }}"
       state: present
       force_apt_get: "yes"
- - name: link python3 to python
-   command: ln -s /usr/bin/python3 /usr/bin/python
+ - name: link
+   file:
+     path: /usr/bin/python
+     src: /usr/bin/python3
+     state: link
+   ignore_errors: yes
+   register: link
